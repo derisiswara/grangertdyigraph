@@ -33,9 +33,6 @@ library(grangertdyigraph)
 # install.packages("vars")
 library(vars)
 
-# Load coffee price data
-data(coffee_data)
-
 # Create VAR model for coffee prices
 var_model <- VAR(coffee_data[, c("Arabica", "Robusta")], p = 2, type = "both")
 
@@ -46,7 +43,10 @@ print(ty_result)
 # Visualize the results as a network graph
 plot_ty_network(ty_result)
 ```
-![]
+
+![](out1.png)
+
+![](graph1.png)
 
 ## References
 
