@@ -30,6 +30,7 @@ devtools::install_github("derisiswara/grangertdyigraph")
 
 ```r
 library(grangertdyigraph)
+# install.packages("vars")
 library(vars)
 
 # Load coffee price data
@@ -45,6 +46,7 @@ print(ty_result)
 # Visualize the results as a network graph
 plot_ty_network(ty_result)
 ```
+![]
 
 ## References
 
@@ -57,14 +59,6 @@ This package is based on the Toda-Yamamoto causality test implementation from:
 - Toda, H. Y., & Yamamoto, T. (1995). Statistical inference in vector autoregressions with possibly integrated processes. Journal of econometrics, 66(1-2), 225-250.
 - Granger, C. W. J. (1969). Investigating Causal Relations by Econometric Models and Cross-spectral Methods. Econometrica, 37(3), 424-438.
 - He, Z., & Maekawa, K. (2001). On spurious Granger causality. Economics Letters, 73(3), 307-313.
-
-## Documentation
-
-For detailed documentation and vignettes, see:
-
-```r
-browseVignettes("grangertdyigraph")
-```
 
 ## License
 

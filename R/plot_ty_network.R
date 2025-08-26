@@ -54,10 +54,7 @@ plot_ty_network <- function(ty_results, alpha = 0.05, layout = "circle",
   igraph::E(g)$significant <- igraph::E(g)$pvalue < alpha
   igraph::E(g)$color <- ifelse(igraph::E(g)$significant, edge_color[1], edge_color[2])
   igraph::E(g)$width <- ifelse(igraph::E(g)$significant, edge_width[1], edge_width[2])
-  
-  # Set edge labels to p-values
-  igraph::E(g)$label <- round(igraph::E(g)$pvalue, 3)
-  
+   
   # Set vertex attributes
   igraph::V(g)$size <- vertex_size
   igraph::V(g)$color <- vertex_color
