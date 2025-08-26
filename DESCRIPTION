@@ -1,0 +1,26 @@
+Package: grangertdyigraph
+Type: Package
+Title: Toda-Yamamoto Granger Causality Tests with Network Graph Visualization
+Version: 0.1.0
+Authors@R: person("Your", "Name", email = "your.email@example.com", role = c("aut", "cre"))
+Description: A package that implements Toda-Yamamoto causality test and visualizes the results using network graph visualization.
+    The Toda-Yamamoto approach (Toda & Yamamoto, 1995) overcomes issues that can arise when testing non-stationary time series
+    for causality relationships. This package provides tools to analyze time series data for causality relationships and
+    creates network visualizations using the igraph package.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    stats,
+    igraph,
+    vars,
+    forecast,
+    aod
+Suggests:
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.0
+VignetteBuilder: knitr

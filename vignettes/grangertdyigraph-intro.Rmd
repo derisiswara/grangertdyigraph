@@ -1,0 +1,118 @@
+---
+title: "Introduction to grangertdyigraph"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to grangertdyigraph}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+The `grangertdyigraph` package provides tools for Granger causality testing and dynamic graph visualization of causal relationships in time series data. This vignette introduces the main functions and demonstrates how to use them effectively.
+
+## Granger Causality
+
+Granger causality is a statistical concept of causality based on prediction. According to Granger causality, if a variable X "Granger-causes" a variable Y, then past values of X should contain information that helps predict Y better than using only past values of Y.
+
+## Basic Usage
+
+First, let's load the package and explore the included example data:
+
+```{r setup}
+library(grangertdyigraph)
+data(example_timeseries)
+
+# View the structure of the example data
+str(example_timeseries)
+```
+
+### Performing Granger Causality Tests
+
+To test for Granger causality relationships:
+
+```{r granger_test}
+# Run Granger causality test
+result <- granger_test(example_timeseries, max_lag = 3)
+
+# Examine the p-values
+print("P-values for Granger causality:")
+print(result$p_values)
+
+# Examine which relationships are significant
+print("Significant causal relationships:")
+print(result$significance)
+```
+
+### Visualizing the Causality Network
+
+We can visualize the causal relationships as a directed network:
+
+```{r network_plot, fig.width=7, fig.height=5}
+# Create and plot network
+g <- plot_granger_network(result)
+plot(g)
+```
+
+In this network, each node represents a variable, and arrows indicate Granger causality from one variable to another.
+
+## Dynamic Causality Analysis
+
+One of the key features of the `grangertdyigraph` package is the ability to analyze how causal relationships evolve over time using a moving window approach.
+
+```{r dynamic_analysis}
+# Create dynamic graph with rolling windows
+dyn_graph <- create_dynamic_graph(
+  example_timeseries, 
+  window_size = 100,  # Size of each window
+  step = 20,          # Step size between windows
+  max_lag = 2         # Maximum lag to consider
+)
+
+# Number of time windows
+length(dyn_graph$time_points)
+```
+
+### Visualizing Dynamic Causality
+
+We can visualize how the causality network changes over time:
+
+```{r dynamic_visualization, eval=FALSE}
+# This would create an interactive visualization in an actual R session
+plots <- plot_dynamic_causality(dyn_graph)
+```
+
+## Working with Your Own Data
+
+To use these functions with your own data, simply prepare your time series data as a data frame where each column represents a variable:
+
+```{r own_data, eval=FALSE}
+# Example with your own data
+my_data <- data.frame(
+  var1 = c(...),
+  var2 = c(...),
+  var3 = c(...)
+)
+
+# Run Granger causality test
+my_result <- granger_test(my_data, max_lag = 3)
+
+# Visualize
+my_graph <- plot_granger_network(my_result)
+plot(my_graph)
+
+# For dynamic analysis
+my_dyn_graph <- create_dynamic_graph(my_data, window_size = 100, step = 20)
+plot_dynamic_causality(my_dyn_graph)
+```
+
+## Conclusion
+
+The `grangertdyigraph` package provides a comprehensive set of tools for analyzing and visualizing causal relationships in time series data. By combining statistical testing with network visualization, it helps in understanding complex relationships between variables and how these relationships evolve over time.
